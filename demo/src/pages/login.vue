@@ -31,24 +31,24 @@ export default {
         url: API.login,
         method: "post",
         data: this.user
-      })
-        .then(res => {
-          if (res.data.isok) {
-              sessionStorage.setItem('adminCode',this.user.type);
-            this.$message({
-              showClose: true,
-              message: "恭喜你，登录成功",
-              type: "success"
-            });
-            this.$router.replace('/index');
-          } else {
-              this.$message({
-              showClose: true,
-              message: res.data.info,
-              type: "error"
-            });
-          }
-        });
+      }).then(res => {
+        if (res.data.isok) {
+          sessionStorage.setItem("adminCode", this.user.type);
+          sessionStorage.setItem("userName", this.user.name);
+          this.$message({
+            showClose: true,
+            message: "恭喜你，登录成功",
+            type: "success"
+          });
+          this.$router.replace("/index");
+        } else {
+          this.$message({
+            showClose: true,
+            message: res.data.info,
+            type: "error"
+          });
+        }
+      });
     }
   }
 };
@@ -86,6 +86,7 @@ export default {
   margin: 10px auto;
   width: 80%;
 }
+
 .btn {
   background: $second;
   border: 1px solid $second;

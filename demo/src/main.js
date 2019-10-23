@@ -18,7 +18,36 @@ import filter from './filter/index';
 for (var key in filter) {
   Vue.filter(key, filter[key]);
 }
-
+//响应拦截
+axios.interceptors.response.use(res=>{
+  if(res.data.code==-1){
+    router.push('/login');
+    return;
+  }
+  return res;
+});
+//路由守卫
+router.beforeEach((to,from,next)=>{
+  if(to.path=='/login'){
+    next();
+    return;
+  }
+  if(sessionStorage.getItem('adminCode')!=0){
+    if(sessionStorage.getItem('adminCode')!=1){
+      next('/login');
+      return;
+    }
+  }
+  if(to.path.includes('manage')){
+    if(sessionStorage.getItem('adminCode')==0){
+      next();
+    }else{
+      next('/login');
+    }
+    return;
+  }
+  next();
+})
 
 Vue.config.productionTip = false
 

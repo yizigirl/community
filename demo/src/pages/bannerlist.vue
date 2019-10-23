@@ -1,9 +1,9 @@
 <template>
   <div class="managelist">
-    <v-manageAdd @manageAdd="add" ref="addm"></v-manageAdd>
+    <v-bannerAdd @manageAdd="add"></v-bannerAdd>
     <el-table
       class="table"
-      :data="manageUser"
+      :data="bannerList"
       height="300"
       border
       style="width: 90%"
@@ -11,38 +11,35 @@
       highlight-current-row
     >
       <el-table-column type="index" label="序号" width="80"></el-table-column>
-      <el-table-column prop="name" label="账号"></el-table-column>
-      <el-table-column prop="pass" label="密码"></el-table-column>
-      <el-table-column label="时间" sortable>
+      <el-table-column label="图片">
         <template slot-scope="scope">
-          <span>{{scope.row.time|timeToDate}}</span>
+          <img class="img" :src="scope.row.img" alt="">
         </template>
       </el-table-column>
-      <el-table-column prop="des" label="备注"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="145">
+      <el-table-column prop="des" label="描述"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button class="modify" type="primary" plain size="small" @click="$refs.addm.modify(scope.row.id)">修改</el-button>
-          <v-manageDel :id="scope.row.id" @manageDel="del"></v-manageDel>
+          <v-bannerDel :id="scope.row.id" @manageDel="del"></v-bannerDel>
         </template>
       </el-table-column>
     </el-table>
-    
   </div>
 </template>
 
 <script>
+
 import API from "../common/js/API";
-import vManageDel from "../components/views/manageDel";
-import vManageAdd from "../components/views/manageAdd";
+import vBannerDel from "../components/views/bannerDel";
+import vBannerAdd from "../components/views/bannerAdd";
 export default {
   data() {
     return {
-      manageUser: []
+      bannerList: []
     };
   },
   components: {
-    vManageDel,
-    vManageAdd
+    vBannerDel,
+    vBannerAdd
   },
   mounted() {
     this.init();
@@ -50,11 +47,10 @@ export default {
   methods: {
     init() {
       this.axios({
-        url: API.findManage,
-        method: "post"
+        url: API.banner
       })
         .then(res => {
-          this.manageUser = res.data.data;
+          this.bannerList = res.data.data;
         })
         .catch(err => {
           console.log(err);
@@ -80,5 +76,8 @@ export default {
   margin: 10px auto;
   text-align: center;
 }
-
+.img{
+    width 130px
+    height 80px
+}
 </style>

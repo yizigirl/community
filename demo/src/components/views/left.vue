@@ -5,19 +5,22 @@
         <router-link to="/index/managelist" v-if="adminCode=='0'">管理员管理</router-link>
       </li>
       <li>
-        <router-link to="/index/user" v-if="adminCode=='1'">banner管理</router-link>
+        <router-link to="/index/bannerlist" v-if="adminCode=='1'">banner管理</router-link>
       </li>
       <li>
-        <router-link to="/index/inform" v-if="adminCode=='1'">家教管理</router-link>
+        <router-link to="/index/teacherlist" v-if="adminCode=='1'">家教管理</router-link>
       </li>
       <li>
-        <router-link to="/index/equipment" v-if="adminCode=='1'">水站管理</router-link>
+        <router-link to="/index/waterlist" v-if="adminCode=='1'">水站管理</router-link>
       </li>
       <li>
-        <router-link to="/index/equipment" v-if="adminCode=='1'">维修管理</router-link>
+        <router-link to="/index/maintainlist" v-if="adminCode=='1'">维修管理</router-link>
       </li>
       <li>
-        <router-link to="/index/equipment" v-if="adminCode=='1'">家政管理</router-link>
+        <router-link to="/index/housekeeping" v-if="adminCode=='1'">家政管理</router-link>
+      </li>
+      <li>
+        <router-link to="/index/changepass" v-if="adminCode=='1'">修改密码</router-link>
       </li>
     </ul>
 
@@ -52,7 +55,7 @@ export default {
 }
 
 .left ul li a {
-  font-size: 28px;
+  font-size: 22px;
   line-height: 40px;
   color: $font;
 }

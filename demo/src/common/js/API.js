@@ -1,4 +1,5 @@
-const baseUrl = '/api';
+// const baseUrl = '/api';
+const baseUrl = '';
 // 1.登录
 const login = baseUrl + '/login';
 // 2.管理员
